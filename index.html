@@ -66,12 +66,10 @@
         </div>
         
         <div class="d-grid">
-            <button type="submit" class="btn btn-primary fw-bold">Submit</button>
+            <button type="submit" class="btn btn-primary fw-bold" onclick="successMessage()">Submit</button>
         </div>
 	
-	<p id="successMessage" class="text-success text-center mt-2 d-none">
-        	<i class="fa-solid fa-check me-1"></i> Thank you! We will take this into consideration. You will get a reply on the email you have written.
-    	</p>
+	<p id="successMessage"></p>
     </form>
 
 </div>
@@ -81,6 +79,9 @@
 <script>
     const form = document.querySelector('form');
     const successMessage = document.getElementById('successMessage');
+
+	function message():
+		document.getElementById('successMessage').innerHTML = "Thank you. We will take that into consideration. You will get a reply on the email you have written."
 
     form.addEventListener('submit', function(event) {
         // 1. Stop the browser from leaving your app page

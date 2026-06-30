@@ -66,7 +66,7 @@
         </div>
         
         <div class="d-grid">
-            <button type="submit" class="btn btn-primary fw-bold" onclick="successMessage()">Submit</button>
+            <button type="submit" class="btn btn-primary fw-bold">Submit</button>
         </div>
 	
 	<p id="successMessage"></p>
@@ -100,7 +100,7 @@
         }).then(response => {
             if (response.ok) {
                 // 4. Show your custom success message on your page!
-                successMessage.classList.remove('d-none');
+			successMessage.innerHTML = "Thank you. We will take that into consideration. You will get a reply on the email you have written.";
                 form.reset(); // Clears out the input boxes for the next user
             } else {
                 alert("Oops! There was a problem sending your form data.");

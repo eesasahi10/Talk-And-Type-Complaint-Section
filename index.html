@@ -43,7 +43,7 @@
         <h3 style="color: white;">Please enter your complaint below.</h3>
     </div>
 
-    <form id="contactform" method="POST" style="width: 100%; max-width: 500px;">
+    <form id="contactForm" method="POST" style="width: 100%; max-width: 500px;">
         
         <div class="mb-3">
             <label for="exampleInputname" class="form-label" style="color: white;">Name</label>
@@ -77,29 +77,32 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  function submitForm() {
+function submitForm() {
     const form = document.getElementById('contactForm');
     const successMessage = document.getElementById('successMessage');
     const data = new FormData(form);
 
     fetch("https://formspree.io/f/mykqkpan", {
-      method: "POST",
-      body: data,
-      headers: { 'Accept': 'application/json' }
+        method: "POST",
+        body: data,
+        headers: { 'Accept': 'application/json' }
     })
-    .then(response => {
-      if (response.ok) {
-        successMessage.innerHTML = "Thank you. We will take this into consideration.";
-        form.reset();
-      } else {
-        alert("Oops! There was a problem.");
-      }
+    .then(async response => {
+        if (response.ok) {
+            successMessage.innerHTML = "Thank you. We will take this into consideration.";
+            form.reset();
+        } else {
+            // This reads the error from Formspree
+            const errorData = await response.json();
+            console.error("Formspree Error:", errorData);
+            alert("Error: " + JSON.stringify(errorData));
+        }
     })
     .catch(error => {
-      console.error('Error:', error);
-      alert("Error connecting to the form service.");
+        console.error('Network Error:', error);
+        alert("Network error. Check your console (F12).");
     });
-  }
+}
 </script>
 
 </body>

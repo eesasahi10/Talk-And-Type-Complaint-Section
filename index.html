@@ -89,7 +89,7 @@ function submitForm() {
     })
     .then(async response => {
         if (response.ok) {
-            successMessage.innerHTML = "Thank you. We will take this into consideration.";
+            successMessage.innerHTML = "Thank you. We will take this into consideration. You will get a reply on the email you have written.";
             form.reset();
         } else {
             // This reads the error from Formspree

@@ -66,7 +66,7 @@
         </div>
         
         <div class="d-grid">
-            <button type="submit" class="btn btn-primary fw-bold">Submit</button>
+            <button type="button" class="btn btn-primary fw-bold" onclick="submitForm()">Submit</button>
         </div>
 	
 	<p id="successMessage"></p>
@@ -77,34 +77,29 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  const form = document.getElementById('contactForm');
-  const successMessage = document.getElementById('successMessage');
-
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-
+  function submitForm() {
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
     const data = new FormData(form);
 
     fetch("https://formspree.io/f/mykqkpan", {
-        method: "POST", // Capitalized
-        body: data,
-        headers: { 'Accept': 'application/json' }
+      method: "POST",
+      body: data,
+      headers: { 'Accept': 'application/json' }
     })
     .then(response => {
-        if (response.ok) {
-            successMessage.innerHTML = "Thank you. We will take this into consideration. You will get a reply on the email you have written.";
-            form.reset();
-        } else {
-            // Log the error so we can see why it's failing
-            response.json().then(data => console.log(data));
-            alert("Oops! There was a problem sending your form data.");
-        }
+      if (response.ok) {
+        successMessage.innerHTML = "Thank you. We will take this into consideration.";
+        form.reset();
+      } else {
+        alert("Oops! There was a problem.");
+      }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert("Error connecting to the form service.");
+      console.error('Error:', error);
+      alert("Error connecting to the form service.");
     });
-});
+  }
 </script>
 
 </body>
